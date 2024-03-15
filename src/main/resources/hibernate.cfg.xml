@@ -17,7 +17,7 @@
         <!-- Enable/disable Hibernate's automatic schema creation/update -->
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
         <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
 
         <!-- Mapping files -->
