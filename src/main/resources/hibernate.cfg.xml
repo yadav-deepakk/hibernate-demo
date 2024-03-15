@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/college</property>
+        <property name="hibernate.connection.username">deepak</property>
+        <property name="hibernate.connection.password">deepak</property>
+
+        <!-- Hibernate dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+        <!-- Enable/disable Hibernate's automatic schema creation/update -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+
+        <!-- Mapping files -->
+        <!-- Add your mapping files here if you are using XML mappings -->
+        <!-- Example: <mapping resource="com/example/domain/User.hbm.xml"/> -->
+
+        <!-- Annotated classes -->
+        <!-- Add your annotated entity classes here -->
+        <!-- Example: <mapping class="com.example.domain.User"/> -->
+        <mapping class="com.hibernate.demo.hibernate_demo.entities.Student"/> 
+    </session-factory>
+</hibernate-configuration>
