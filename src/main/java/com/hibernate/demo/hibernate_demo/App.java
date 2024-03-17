@@ -1,18 +1,13 @@
 package com.hibernate.demo.hibernate_demo;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
 import com.hibernate.demo.hibernate_demo.crud_operations.*;
 import com.hibernate.demo.hibernate_demo.entities.Student;
 
 public class App {
 	public static void main(String[] args) {
 		// CRUD Operations
-		Configuration configuration = new Configuration().configure();
-		SessionFactory sessionFactory = configuration.buildSessionFactory();
-		Session session = sessionFactory.openSession();
+		Session session = HibernateSession.createSession();
 
 		// C - Create
 		Student student1 = new Student("Deep Shah", "deep12@shah.com", 1234567121, 10);
@@ -24,7 +19,7 @@ public class App {
 
 		// R - Read
 		Student stud1 = selectStudent.loadStudent(session, 1); // load - lazy loading
-		Student stud2 = selectStudent.loadStudent(session, 2); // get - eager loading
+		Student stud2 = selectStudent.getStudent(session, 2); // get - eager loading
 		System.out.println(stud1 + "\n" + stud2);
 
 		// U - Update
@@ -36,6 +31,6 @@ public class App {
 		DeleteStudent.deleteStudentById(session, 1);
 		DeleteStudent.deleteStudentById(session, 100);
 
-		session.close();
+		HibernateSession.closeSession(session);
 	}
 }
