@@ -1,12 +1,17 @@
 package com.hibernate.demo.hibernate_demo.entities;
 
-import javax.persistence.Column;
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
