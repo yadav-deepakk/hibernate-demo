@@ -2,9 +2,11 @@ package com.hibernate.demo.hibernate_demo.entities;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -16,10 +18,17 @@ public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int rollNo;
+
 	private String studentName;
+
 	private String emailId;
+
 	private int phoneNo;
+
 	private int standard;
+
+	@OneToOne
+	private StudentIdentityCard iCard;
 
 	public Student() {
 		super();
@@ -31,6 +40,15 @@ public class Student {
 		this.emailId = emailId;
 		this.phoneNo = phoneNo;
 		this.standard = standard;
+	}
+
+	public Student(String studentName, String emailId, int phoneNo, int standard, StudentIdentityCard iCard) {
+		super();
+		this.studentName = studentName;
+		this.emailId = emailId;
+		this.phoneNo = phoneNo;
+		this.standard = standard;
+		this.iCard = iCard;
 	}
 
 	public int getRollNo() {
@@ -71,6 +89,14 @@ public class Student {
 
 	public void setStandard(int standard) {
 		this.standard = standard;
+	}
+
+	public StudentIdentityCard getiCard() {
+		return iCard;
+	}
+
+	public void setiCard(StudentIdentityCard iCard) {
+		this.iCard = iCard;
 	}
 
 	@Override
