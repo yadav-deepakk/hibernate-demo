@@ -1,4 +1,4 @@
-package com.hibernate.demo.hibernate_demo.crud_operations;
+package com.hibernate.demo.hibernate_demo.repo;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;

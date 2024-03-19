@@ -1,4 +1,4 @@
-package com.hibernate.demo.hibernate_demo.crud_operations;
+package com.hibernate.demo.hibernate_demo.repo;
 
 import java.util.List;
 
@@ -133,7 +133,7 @@ public class StudentRepo {
 		if (student != null) {
 			return student.getCourseList();
 		} else {
-			System.out.println("No such student present into the database.");
+			System.out.println("No such STUDENT present into the database.");
 			return null;
 		}
 	}

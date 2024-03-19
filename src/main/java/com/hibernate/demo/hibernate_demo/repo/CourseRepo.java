@@ -1,9 +1,12 @@
-package com.hibernate.demo.hibernate_demo.crud_operations;
+package com.hibernate.demo.hibernate_demo.repo;
+
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.hibernate.demo.hibernate_demo.entities.Course;
+import com.hibernate.demo.hibernate_demo.entities.Student;
 
 public class CourseRepo {
 	// lazy Loading
@@ -42,5 +45,15 @@ public class CourseRepo {
 			ex.printStackTrace();
 		}
 		return isInsertionSucessful;
+	}
+	
+	public static List<Student> getStudentListByCourseId(Session session, int courseId) {
+		Course c  = getCourse(session, courseId);
+		if (c != null) {
+			return c.getStudents();
+		} else {
+			System.out.println("No such COURSE present into the database.");
+			return null;
+		}
 	}
 }

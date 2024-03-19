@@ -1,14 +1,18 @@
 package com.hibernate.demo.hibernate_demo.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cache;
@@ -30,11 +34,12 @@ public class Student {
 
 	private int standard;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private StudentIdentityCard iCard;
-	
-	@OneToMany(mappedBy = "student")
-	private List<Course> courseList; 
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "EnrolledFor", joinColumns = @JoinColumn(name = "rollNo"), inverseJoinColumns = @JoinColumn(name = "courseId"))
+	private List<Course> courseList = new ArrayList<Course>();
 
 	public Student() {
 		super();
@@ -56,8 +61,6 @@ public class Student {
 		this.standard = standard;
 		this.iCard = iCard;
 	}
-	
-	
 
 	public Student(String studentName, String emailId, int phoneNo, int standard, StudentIdentityCard iCard,
 			List<Course> courseList) {

@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
-import com.hibernate.demo.hibernate_demo.crud_operations.*;
+
 import com.hibernate.demo.hibernate_demo.entities.Course;
 import com.hibernate.demo.hibernate_demo.entities.Student;
 import com.hibernate.demo.hibernate_demo.entities.StudentIdentityCard;
+import com.hibernate.demo.hibernate_demo.repo.*;
 
 public class App {
 	public static void main(String[] args) {
@@ -66,7 +67,7 @@ public class App {
 //		HibernateSession.closeSession(session);
 
 //		// Entity relationships: OneToMany and ManyToOne
-		Session session = HibernateSession.createSession();
+//		Session session = HibernateSession.createSession();
 //		Student student1 = new Student("Raj Singh", "Raj@singh.com", 1234567121, 10);
 //		Student student2 = new Student("Meet Shah", "meet@shah.com", 1221221221, 10);
 //
@@ -89,10 +90,32 @@ public class App {
 //		CourseRepo.insertCourses(session, new Course[] { c1, c2, c3,c4,c5 });
 //		StudentRepo.insertStudents(session, new Student[] { student1, student2 });
 
-		List<Course> courseList1 = StudentRepo.getCourseListByStudentId(session, 1); 
-		List<Course> courseList2 = StudentRepo.getCourseListByStudentId(session, 2); 
-		System.out.println(courseList1);
-		System.out.println(courseList2);
+//		List<Course> courseList1 = StudentRepo.getCourseListByStudentId(session, 1); 
+//		List<Course> courseList2 = StudentRepo.getCourseListByStudentId(session, 2); 
+//		System.out.println(courseList1);
+//		System.out.println(courseList2);
+//		HibernateSession.closeSession(session);
+
+		// Entity relationship - many to one 
+		Session session = HibernateSession.createSession();
+//		Student student1 = new Student("Raj Singh", "Raj@singh.com", 1234567121, 10);
+//		Student student2 = new Student("Meet Shah", "meet@shah.com", 1221221221, 10);
+//		Course c1 = new Course("DBMS");
+//		Course c2 = new Course("Java and OOPs");
+//
+//		student1.getCourseList().add(c1);
+//		student1.getCourseList().add(c2);
+//		student2.getCourseList().add(c2);
+//
+//		StudentRepo.insertStudents(session, new Student[] { student1, student2 });
+//		CourseRepo.insertCourses(session, new Course[] { c1, c2 });
+
+		List<Student> studentList = CourseRepo.getStudentListByCourseId(session, 2);
+		List<Course> courseList = StudentRepo.getCourseListByStudentId(session, 1); 
+		
+		System.out.println("course2 is opted by: " + studentList);
+		System.out.println("student1 has been opted for: " + courseList);
+		
 		HibernateSession.closeSession(session);
 
 	}

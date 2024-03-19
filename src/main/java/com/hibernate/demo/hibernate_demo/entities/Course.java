@@ -1,12 +1,15 @@
 package com.hibernate.demo.hibernate_demo.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -18,25 +21,27 @@ public class Course {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int courseId;
-	
+
 	private String courseName;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Student student; 
+
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "courseList")
+	private List<Student> studentList = new ArrayList<Student>();
 
 	public Course() {
 		super();
 	}
-	
-	public Course(String courseName){
-		super(); 
-		this.courseName = courseName; 
+
+	public Course(String courseName) {
+		super();
+		this.courseName = courseName;
 	}
 
-	public Course(String courseName, Student student){
-		super(); 
-		this.courseName = courseName; 
-		this.student = student; 
+	public List<Student> getStudents() {
+		return studentList;
+	}
+
+	public void setStudents(List<Student> studentList) {
+		this.studentList = studentList;
 	}
 
 	public int getCourseId() {
