@@ -17,7 +17,7 @@
 		<!-- Enable/disable Hibernate's automatic schema creation/update -->
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">validate</property>
 		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
 		<property name="hibernate.cache.use">false</property>
 		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
@@ -36,5 +36,7 @@
 			class="com.hibernate.demo.hibernate_demo.entities.Student" />
 		<mapping
 			class="com.hibernate.demo.hibernate_demo.entities.StudentIdentityCard" />
+		<mapping
+			class="com.hibernate.demo.hibernate_demo.entities.Course" />
 	</session-factory>
 </hibernate-configuration>

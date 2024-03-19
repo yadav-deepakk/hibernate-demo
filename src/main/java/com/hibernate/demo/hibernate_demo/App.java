@@ -1,9 +1,12 @@
 package com.hibernate.demo.hibernate_demo;
 
 import java.time.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
 import com.hibernate.demo.hibernate_demo.crud_operations.*;
+import com.hibernate.demo.hibernate_demo.entities.Course;
 import com.hibernate.demo.hibernate_demo.entities.Student;
 import com.hibernate.demo.hibernate_demo.entities.StudentIdentityCard;
 
@@ -47,8 +50,8 @@ public class App {
 //		System.out.println(stud2);
 //		HibernateSession.closeSession(session1);
 
-//		// Entity relationships
-		Session session = HibernateSession.createSession();
+//		// Entity relationships: one to one 
+//		Session session = HibernateSession.createSession();
 //		Student student1 = new Student("Deepkamal Singh", "deep12@kamal.com", 1234567121, 10);
 //		Student student2 = new Student("Suraj Gupta", "suraj23@gupta.com", 1221221221, 10);
 //		StudentIdentityCard studentICard1 = new StudentIdentityCard(LocalDate.of(2023, 06, 23), 1);
@@ -57,10 +60,39 @@ public class App {
 //		student2.setiCard(studentICard2);
 //		StudentIdCardRepo.insertIdCards(session, new StudentIdentityCard[] { studentICard1, studentICard2 });
 //		StudentRepo.insertStudents(session, new Student[] { student1, student2 });
+
+//		StudentIdentityCard idCard = StudentIdCardRepo.getStudentIdentityCard(session, 1);
+//		System.out.println(idCard);
 //		HibernateSession.closeSession(session);
 
-		StudentIdentityCard idCard = StudentIdCardRepo.getStudentIdentityCard(session, 1);
-		System.out.println(idCard);
+//		// Entity relationships: OneToMany and ManyToOne
+		Session session = HibernateSession.createSession();
+//		Student student1 = new Student("Raj Singh", "Raj@singh.com", 1234567121, 10);
+//		Student student2 = new Student("Meet Shah", "meet@shah.com", 1221221221, 10);
+//
+//		Course c1 = new Course("DBMS", student1);
+//		Course c2 = new Course("Java and OOPs", student2);
+//		Course c3 = new Course("Java and OOPs", student1);
+//		Course c4 = new Course("Computer Networks", student1);
+//		Course c5 = new Course("Computer Networks", student2);
+//
+//		ArrayList<Course> courseList1 = new ArrayList<Course>();
+//		ArrayList<Course> courseList2 = new ArrayList<Course>();
+//		courseList1.add(c1);
+//		courseList1.add(c2);
+//		courseList1.add(c5);
+//		courseList2.add(c1);
+//		courseList2.add(c2);
+//		student1.setCourseList(courseList1);
+//		student2.setCourseList(courseList2);
+//
+//		CourseRepo.insertCourses(session, new Course[] { c1, c2, c3,c4,c5 });
+//		StudentRepo.insertStudents(session, new Student[] { student1, student2 });
+
+		List<Course> courseList1 = StudentRepo.getCourseListByStudentId(session, 1); 
+		List<Course> courseList2 = StudentRepo.getCourseListByStudentId(session, 2); 
+		System.out.println(courseList1);
+		System.out.println(courseList2);
 		HibernateSession.closeSession(session);
 
 	}

@@ -1,8 +1,11 @@
 package com.hibernate.demo.hibernate_demo.crud_operations;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.hibernate.demo.hibernate_demo.entities.Course;
 import com.hibernate.demo.hibernate_demo.entities.Student;
 import com.hibernate.demo.hibernate_demo.entities.StudentIdentityCard;
 
@@ -15,14 +18,6 @@ public class StudentRepo {
 	// eager loading
 	public static Student getStudent(Session session, int id) {
 		return session.get(Student.class, id);
-	}
-
-	public static StudentIdentityCard getStudentIdCardDetailsByStudentId(Session session, int studId) {
-		Student student = getStudent(session, studId);
-		if (student != null) {
-			return student.getiCard();
-		} else
-			return null;
 	}
 
 	public static boolean insertStudents(Session session, Student[] students) {
@@ -123,5 +118,23 @@ public class StudentRepo {
 			e.printStackTrace();
 		}
 		return isDeletionSuccessful;
+	}
+	
+	public static StudentIdentityCard getStudentIdCardDetailsByStudentId(Session session, int rollNo) {
+		Student student = getStudent(session, rollNo);
+		if (student != null) {
+			return student.getiCard();
+		} else
+			return null;
+	}
+
+	public static List<Course> getCourseListByStudentId(Session session, int rollNo) {
+		Student student = getStudent(session, rollNo);
+		if (student != null) {
+			return student.getCourseList();
+		} else {
+			System.out.println("No such student present into the database.");
+			return null;
+		}
 	}
 }

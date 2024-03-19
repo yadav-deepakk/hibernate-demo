@@ -1,11 +1,14 @@
 package com.hibernate.demo.hibernate_demo.entities;
 
+import java.util.List;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cache;
@@ -29,6 +32,9 @@ public class Student {
 
 	@OneToOne
 	private StudentIdentityCard iCard;
+	
+	@OneToMany(mappedBy = "student")
+	private List<Course> courseList; 
 
 	public Student() {
 		super();
@@ -49,6 +55,27 @@ public class Student {
 		this.phoneNo = phoneNo;
 		this.standard = standard;
 		this.iCard = iCard;
+	}
+	
+	
+
+	public Student(String studentName, String emailId, int phoneNo, int standard, StudentIdentityCard iCard,
+			List<Course> courseList) {
+		super();
+		this.studentName = studentName;
+		this.emailId = emailId;
+		this.phoneNo = phoneNo;
+		this.standard = standard;
+		this.iCard = iCard;
+		this.courseList = courseList;
+	}
+
+	public List<Course> getCourseList() {
+		return courseList;
+	}
+
+	public void setCourseList(List<Course> courseList) {
+		this.courseList = courseList;
 	}
 
 	public int getRollNo() {
